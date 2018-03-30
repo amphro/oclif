@@ -11,12 +11,11 @@ jobs:
       - checkout
       - restore_cache: &restore_cache
           keys:
-            - v3-{{checksum ".circleci/config.yml"}}-{{ checksum "yarn.lock"}}
-            - v3-{{checksum ".circleci/config.yml"}}
-            - v3
+            - v4-{{checksum ".circleci/config.yml"}}-{{ checksum "yarn.lock"}}
+            - v4-{{checksum ".circleci/config.yml"}}
+            - v4
       - run: .circleci/greenkeeper
-      - run: yarn add -D mocha-junit-reporter@1 @commitlint/cli@6 @commitlint/config-conventional@6
-      - run: yarn exec commitlint -- -x @commitlint/config-conventional --from origin/master
+      - run: yarn add -D mocha-junit-reporter@1
       - run: yarn exec nps lint
       - persist_to_workspace: {root: node_modules,  paths: ["*"]}
   node-latest-multi:
@@ -67,6 +66,17 @@ jobs:
       - run: .circleci/setup_git
       - run: yarn exec nps test.command
       - store_test_results: *store_test_results
+  node-latest-hook:
+    <<: *lint
+    docker:
+      - image: node:8
+    steps: &hook_steps
+      - checkout
+      - restore_cache: *restore_cache
+      - attach_workspace: {at: node_modules}
+      - run: .circleci/setup_git
+      - run: yarn exec nps test.hook
+      - store_test_results: *store_test_results
   node-8-base: &node_8
     <<: *lint
     docker:
@@ -87,6 +97,9 @@ jobs:
   node-8-command:
     <<: *node_8
     steps: *command_steps
+  node-8-hook:
+    <<: *node_8
+    steps: *hook_steps
 
   cache:
     <<: *lint
@@ -94,12 +107,12 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v3-{{checksum ".circleci/config.yml"}}-{{checksum "yarn.lock"}}
+            - v4-{{checksum ".circleci/config.yml"}}-{{checksum "yarn.lock"}}
       - run: yarn global add greenkeeper-lockfile@1
-      - run: yarn add -D mocha-junit-reporter@1 @commitlint/cli@6 @commitlint/config-conventional@6
+      - run: yarn add -D mocha-junit-reporter@1
       - run: yarn exec nps test.command
       - save_cache:
-          key: v3-{{checksum ".circleci/config.yml"}}-{{checksum "yarn.lock"}}
+          key: v4-{{checksum ".circleci/config.yml"}}-{{checksum "yarn.lock"}}
           paths:
             - /usr/local/share/.cache/yarn
             - /usr/local/share/.config/yarn
@@ -122,6 +135,7 @@ workflows:
       - node-latest-plugin: {requires: [lint] }
       - node-latest-multi: {requires: [lint] }
       - node-latest-command: {requires: [lint] }
+      - node-latest-hook: {requires: [lint] }
       - cache: {requires: [release] }
       - release:
           context: org-global
@@ -134,6 +148,7 @@ workflows:
             - node-latest-plugin
             - node-latest-multi
             - node-latest-command
+            - node-latest-hook
   nightly:
     triggers:
       - schedule:
@@ -149,8 +164,10 @@ workflows:
       - node-latest-plugin: {requires: [lint] }
       - node-latest-multi: {requires: [lint] }
       - node-latest-command: {requires: [lint] }
+      - node-latest-hook: {requires: [lint] }
       - node-8-base: {requires: [lint] }
       - node-8-single: {requires: [lint] }
       - node-8-plugin: {requires: [lint] }
       - node-8-multi: {requires: [lint] }
       - node-8-command: {requires: [lint] }
+      - node-8-hook: {requires: [lint] }

@@ -11,10 +11,10 @@ module.exports = {
     '@semantic-release/git',
     '@semantic-release/github',
   ],
-  publish: [
+  prepare: [
     {
       path: '@semantic-release/exec',
-      cmd: 'yarn run version',
+      cmd: 'OCLIF_NEXT_VERSION=${nextRelease.version} yarn run version',
     },
     {path: './scripts/release_example'},
     '@semantic-release/changelog',
@@ -23,6 +23,13 @@ module.exports = {
       path: '@semantic-release/git',
       assets: ['package.json', 'CHANGELOG.md', 'README.md', 'docs'],
     },
+  ],
+  publish: [
+    '@semantic-release/npm',
     '@semantic-release/github',
+    {
+      path: '@semantic-release/exec',
+      cmd: './scripts/release_create_oclif.js',
+    },
   ],
 }

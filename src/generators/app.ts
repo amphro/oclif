@@ -1,6 +1,7 @@
 // tslint:disable no-floating-promises
 // tslint:disable no-console
 
+import {execSync} from 'child_process'
 import * as fs from 'fs'
 import * as _ from 'lodash'
 import * as path from 'path'
@@ -13,6 +14,11 @@ const fixpack = require('fixpack')
 const debug = require('debug')('generator-oclif')
 const {version} = require('../../package.json')
 
+let hasYarn = false
+try {
+  execSync('yarn -v')
+  hasYarn = true
+} catch {}
 // function stringToArray(s: string) {
 //   const keywords: string[] = []
 
@@ -33,6 +39,8 @@ class App extends Generator {
     mocha: boolean
     'semantic-release': boolean
     typescript: boolean
+    tslint: boolean
+    yarn: boolean
   }
   args!: {[k: string]: string}
   type: 'single' | 'multi' | 'plugin' | 'base'
@@ -52,12 +60,16 @@ class App extends Generator {
     options: {
       mocha: boolean
       typescript: boolean
+      tslint: boolean
+      yarn: boolean
       'semantic-release': boolean
     }
   }
   mocha!: boolean
   semantic_release!: boolean
   ts!: boolean
+  tslint!: boolean
+  yarn!: boolean
   get _ext() { return this.ts ? 'ts' : 'js' }
   get _bin() {
     let bin = this.pjson.oclif && (this.pjson.oclif.bin || this.pjson.oclif.dirname) || this.pjson.name
@@ -76,6 +88,8 @@ class App extends Generator {
       mocha: opts.options.includes('mocha'),
       'semantic-release': opts.options.includes('semantic-release'),
       typescript: opts.options.includes('typescript'),
+      tslint: opts.options.includes('tslint'),
+      yarn: opts.options.includes('yarn'),
     }
   }
 
@@ -202,8 +216,10 @@ class App extends Generator {
           name: 'options',
           message: 'optional components to include',
           choices: [
+            {name: 'yarn (npm alternative)', value: 'yarn', checked: this.options.yarn || hasYarn},
             {name: 'mocha (testing framework)', value: 'mocha', checked: true},
             {name: 'typescript (static typing for javascript)', value: 'typescript', checked: true},
+            {name: 'tslint (static analysis tool for typescript)', value: 'tslint', checked: true},
             {name: 'semantic-release (automated version management)', value: 'semantic-release', checked: this.options['semantic-release']}
           ],
           filter: ((arr: string[]) => _.keyBy(arr)) as any,
@@ -220,6 +236,8 @@ class App extends Generator {
     debug(this.answers)
     this.options = this.answers.options
     this.ts = this.options.typescript
+    this.tslint = this.options.tslint
+    this.yarn = this.options.yarn
     this.mocha = this.options.mocha
     this.semantic_release = this.options['semantic-release']
 
@@ -231,12 +249,13 @@ class App extends Generator {
     this.pjson.files = this.answers.files || defaults.files || [(this.ts ? '/lib' : '/src')]
     this.pjson.license = this.answers.license || defaults.license
     this.pjson.repository = this.answers.github ? `${this.answers.github.user}/${this.answers.github.repo}` : defaults.repository
-    this.pjson.scripts.posttest = 'yarn run lint'
+    let npm = this.yarn ? 'yarn' : 'npm'
+    this.pjson.scripts.posttest = `${npm} run lint`
     // this.pjson.scripts.precommit = 'yarn run lint'
-    if (this.ts && this.mocha) {
-      this.pjson.scripts.lint = 'tsc -p test --noEmit && tslint -p test -t stylish'
-    } else if (this.ts) {
-      this.pjson.scripts.lint = 'tsc -p . --noEmit && tslint -p . -t stylish'
+    if (this.ts) {
+      const tsProject = this.mocha ? 'test' : '.'
+      this.pjson.scripts.lint = `tsc -p ${tsProject} --noEmit`
+      if (this.tslint) this.pjson.scripts.lint += ` && tslint -p ${tsProject} -t stylish`
     } else {
       this.pjson.scripts.lint = 'eslint .'
     }
@@ -247,14 +266,14 @@ class App extends Generator {
     }
     if (this.ts) {
       this.pjson.scripts.build = 'rm -rf lib && tsc'
-      this.pjson.scripts.prepublishOnly = 'yarn run build'
+      this.pjson.scripts.prepublishOnly = `${npm} run build`
     }
     if (['plugin', 'multi'].includes(this.type)) {
       this.pjson.scripts.prepublishOnly = nps.series(this.pjson.scripts.prepublishOnly, 'oclif-dev manifest')
       if (this.semantic_release) this.pjson.scripts.prepublishOnly = nps.series(this.pjson.scripts.prepublishOnly, 'oclif-dev readme')
       this.pjson.scripts.version = nps.series('oclif-dev readme', 'git add README.md')
       this.pjson.scripts.clean = 'rm -f .oclif.manifest.json'
-      this.pjson.scripts.postpublish = this.pjson.scripts.preversion = 'yarn run clean'
+      this.pjson.scripts.postpublish = this.pjson.scripts.preversion = `${npm} run clean`
       this.pjson.files.push('.oclif.manifest.json')
     }
     this.pjson.keywords = defaults.keywords || [this.type === 'plugin' ? 'oclif-plugin' : 'oclif']
@@ -307,7 +326,9 @@ class App extends Generator {
     }
 
     if (this.ts) {
-      this.fs.copyTpl(this.templatePath('tslint.json'), this.destinationPath('tslint.json'), this)
+      if (this.tslint) {
+        this.fs.copyTpl(this.templatePath('tslint.json'), this.destinationPath('tslint.json'), this)
+      }
       this.fs.copyTpl(this.templatePath('tsconfig.json'), this.destinationPath('tsconfig.json'), this)
       if (this.mocha) {
         this.fs.copyTpl(this.templatePath('test/tsconfig.json'), this.destinationPath('test/tsconfig.json'), this)
@@ -344,10 +365,6 @@ class App extends Generator {
     this.fs.copyTpl(this.templatePath('eslintrc'), this.destinationPath('.eslintrc'), this)
     const eslintignore = this._eslintignore()
     if (eslintignore.trim()) this.fs.write(this.destinationPath('.eslintignore'), this._eslintignore())
-    // this.fs.copyTpl(this.templatePath('package-scripts.js.ejs'), this.destinationPath('package-scripts.js'), this)
-    // if (this.semantic_release) {
-    //   this.fs.copyTpl(this.templatePath('.commitlintrc.js'), this.destinationPath('.commitlintrc.js'), this)
-    // }
 
     switch (this.type) {
       case 'single':
@@ -373,7 +390,6 @@ class App extends Generator {
         dependencies.push(
           '@oclif/config',
           '@oclif/command',
-          '@oclif/errors',
           '@oclif/plugin-help',
         )
         break
@@ -381,7 +397,6 @@ class App extends Generator {
         dependencies.push(
           '@oclif/command',
           '@oclif/config',
-          '@oclif/errors',
         )
         devDependencies.push(
           '@oclif/dev-cli',
@@ -393,12 +408,11 @@ class App extends Generator {
         dependencies.push(
           '@oclif/config',
           '@oclif/command',
-          '@oclif/errors',
           '@oclif/plugin-help',
-          'globby',
         )
         devDependencies.push(
           '@oclif/dev-cli',
+          'globby',
         )
     }
     if (this.mocha) {
@@ -420,9 +434,14 @@ class App extends Generator {
         // '@types/supports-color',
         'typescript',
         'ts-node@5',
-        '@oclif/tslint',
-        'tslint',
+        'tslib',
       )
+      if (this.tslint) {
+        devDependencies.push(
+          '@oclif/tslint',
+          'tslint',
+        )
+      }
     } else {
       devDependencies.push(
         'eslint',
@@ -431,9 +450,11 @@ class App extends Generator {
     }
     let yarnOpts = {} as any
     if (process.env.YARN_MUTEX) yarnOpts.mutex = process.env.YARN_MUTEX
+    const install = (deps: string[], opts: object) => this.yarn ? this.yarnInstall(deps, opts) : this.npmInstall(deps, opts)
+    const dev = this.yarn ? {dev: true} : {'save-dev': true}
     Promise.all([
-      this.yarnInstall(devDependencies, {...yarnOpts, dev: true, ignoreScripts: true}),
-      this.yarnInstall(dependencies, yarnOpts),
+      install(devDependencies, {...yarnOpts, ...dev, ignoreScripts: true}),
+      install(dependencies, yarnOpts),
     ]).then(() => {
       if (['plugin', 'multi'].includes(this.type)) {
         this.spawnCommandSync(path.join('.', 'node_modules/.bin/oclif-dev'), ['readme'])

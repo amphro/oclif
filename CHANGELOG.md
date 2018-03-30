@@ -1,3 +1,306 @@
+<a name="1.7.10"></a>
+## [1.7.10](https://github.com/oclif/oclif/compare/v1.7.9...v1.7.10) (2018-03-28)
+
+
+### Bug Fixes
+
+* remove commitlint from this project ([#87](https://github.com/oclif/oclif/issues/87)) ([beb4b4e](https://github.com/oclif/oclif/commit/beb4b4e))
+
+<a name="1.7.9"></a>
+## [1.7.9](https://github.com/oclif/oclif/compare/v1.7.8...v1.7.9) (2018-03-25)
+
+
+### Bug Fixes
+
+* move release script into semantic-release ([020e633](https://github.com/oclif/oclif/commit/020e633))
+
+<a name="1.7.8"></a>
+## [1.7.8](https://github.com/oclif/oclif/compare/v1.7.7...v1.7.8) (2018-03-25)
+
+
+### Bug Fixes
+
+* automate create-oclif publishing ([bffcc90](https://github.com/oclif/oclif/commit/bffcc90))
+
+<a name="1.7.7"></a>
+## [1.7.7](https://github.com/oclif/oclif/compare/v1.7.6...v1.7.7) (2018-03-25)
+
+
+### Bug Fixes
+
+* updated command ([bd7921f](https://github.com/oclif/oclif/commit/bd7921f))
+
+<a name="1.7.6"></a>
+## [1.7.6](https://github.com/oclif/oclif/compare/v1.7.5...v1.7.6) (2018-03-24)
+
+
+### Bug Fixes
+
+* updated config and warn-if-update-available ([db21fca](https://github.com/oclif/oclif/commit/db21fca))
+
+<a name="1.7.5"></a>
+## [1.7.5](https://github.com/oclif/oclif/compare/v1.7.4...v1.7.5) (2018-03-24)
+
+
+### Bug Fixes
+
+* add warning if CLI is out of date ([fa5ed18](https://github.com/oclif/oclif/commit/fa5ed18))
+
+<a name="1.7.4"></a>
+## [1.7.4](https://github.com/oclif/oclif/compare/v1.7.3...v1.7.4) (2018-03-24)
+
+
+### Bug Fixes
+
+* updated plugin-help ([19df489](https://github.com/oclif/oclif/commit/19df489))
+
+<a name="1.7.3"></a>
+## [1.7.3](https://github.com/oclif/oclif/compare/v1.7.2...v1.7.3) (2018-03-24)
+
+
+### Bug Fixes
+
+* add hook to circle ([a4da315](https://github.com/oclif/oclif/commit/a4da315))
+* fixed hook circle config test ([3f4ab92](https://github.com/oclif/oclif/commit/3f4ab92))
+* updated plugin-help ([cb53bb3](https://github.com/oclif/oclif/commit/cb53bb3))
+
+<a name="1.7.2"></a>
+## [1.7.2](https://github.com/oclif/oclif/compare/v1.7.1...v1.7.2) (2018-03-24)
+
+
+### Bug Fixes
+
+* add yarn to examples ([b4cd8b3](https://github.com/oclif/oclif/commit/b4cd8b3))
+* fixed semantic-release config ([a4f69f1](https://github.com/oclif/oclif/commit/a4f69f1))
+* update semantic-release ([9f45593](https://github.com/oclif/oclif/commit/9f45593))
+* update semantic-release ([d2e3159](https://github.com/oclif/oclif/commit/d2e3159))
+
+<a name="1.7.1"></a>
+## [1.7.1](https://github.com/oclif/oclif/compare/7b683610ea2e5f16d622a0b7ebb6b9d2ee484b07...v1.7.1) (2018-03-24)
+
+
+### Bug Fixes
+
+* remove commitlint ([#83](https://github.com/oclif/oclif/issues/83)) ([b5c6327](https://github.com/oclif/oclif/commit/b5c6327))
+
+<a name="1.7.0"></a>
+# [1.7.0](https://github.com/oclif/oclif/compare/c45448e97858b789a91f765c631c91c7f8263f9f...v1.7.0) (2018-03-24)
+
+
+### Features
+
+* removes snyk readme template badge ([#80](https://github.com/oclif/oclif/issues/80)) ([7b68361](https://github.com/oclif/oclif/commit/7b68361)), closes [oclif/oclif#69](https://github.com/oclif/oclif/issues/69)
+
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/oclif/oclif/compare/e117a8559b1ad84c8110df71906ca4c975ab529f...v1.6.0) (2018-03-24)
+
+
+### Features
+
+* removes greenkeeper readme template badge ([#81](https://github.com/oclif/oclif/issues/81)) ([c45448e](https://github.com/oclif/oclif/commit/c45448e)), closes [oclif/oclif#70](https://github.com/oclif/oclif/issues/70)
+
+<a name="1.5.8"></a>
+## [1.5.8](https://github.com/oclif/oclif/compare/214be061c7f17287a12474e0dff4d39cc63e8109...v1.5.8) (2018-03-24)
+
+
+### Bug Fixes
+
+* fix hooks to work with ts-node ([e117a85](https://github.com/oclif/oclif/commit/e117a85)), closes [#78](https://github.com/oclif/oclif/issues/78)
+
+<a name="1.5.7"></a>
+## [1.5.7](https://github.com/oclif/oclif/compare/e6446ca65238f4ab21f3e30f0391bf4e49cc6f95...v1.5.7) (2018-03-24)
+
+
+### Bug Fixes
+
+* fixed yarn detection ([214be06](https://github.com/oclif/oclif/commit/214be06))
+
+<a name="1.5.6"></a>
+## [1.5.6](https://github.com/oclif/oclif/compare/19579350dadf5007c5155cd9c41834345acb17f3...v1.5.6) (2018-03-24)
+
+
+### Bug Fixes
+
+* updated command/config ([e6446ca](https://github.com/oclif/oclif/commit/e6446ca))
+
+<a name="1.5.5"></a>
+## [1.5.5](https://github.com/oclif/oclif/compare/c82d5f484a425261cbe28692aabc3c30b5827550...v1.5.5) (2018-03-24)
+
+
+### Bug Fixes
+
+* fixed npm devDependencies ([1957935](https://github.com/oclif/oclif/commit/1957935))
+* move globby to devDependencies ([9f07b24](https://github.com/oclif/oclif/commit/9f07b24))
+
+<a name="1.5.4"></a>
+## [1.5.4](https://github.com/oclif/oclif/compare/367e189144af37df10373e4a20e9d22106e97e29...v1.5.4) (2018-03-24)
+
+
+### Bug Fixes
+
+* [@oclif](https://github.com/oclif)/errors no longer directly required ([c82d5f4](https://github.com/oclif/oclif/commit/c82d5f4))
+
+<a name="1.5.3"></a>
+## [1.5.3](https://github.com/oclif/oclif/compare/90ffc41943efe6c0de36d8793097581737c7a5b5...v1.5.3) (2018-03-24)
+
+
+### Bug Fixes
+
+* updated deps ([367e189](https://github.com/oclif/oclif/commit/367e189))
+
+<a name="1.5.2"></a>
+## [1.5.2](https://github.com/oclif/oclif/compare/d24456ba28f0ea2d4e392dda30a4543a461fc6c5...v1.5.2) (2018-03-23)
+
+
+### Bug Fixes
+
+* updated dev-cli ([90ffc41](https://github.com/oclif/oclif/commit/90ffc41))
+
+<a name="1.5.1"></a>
+## [1.5.1](https://github.com/oclif/oclif/compare/4106708e3fa2332fcada0361c76a1071f61315a8...v1.5.1) (2018-03-23)
+
+
+### Bug Fixes
+
+* add usage/command headers explicitly ([d24456b](https://github.com/oclif/oclif/commit/d24456b))
+
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/oclif/oclif/compare/f8337999b5a22cbe9bfa90a7d7a026a1a15a333b...v1.5.0) (2018-03-23)
+
+
+### Features
+
+* add hook generator ([#77](https://github.com/oclif/oclif/issues/77)) ([4106708](https://github.com/oclif/oclif/commit/4106708))
+
+<a name="1.4.12"></a>
+## [1.4.12](https://github.com/oclif/oclif/compare/43ebebaec031697f7e1595e79771d15c76e11cd6...v1.4.12) (2018-03-23)
+
+
+### Bug Fixes
+
+* document yarn flag ([f833799](https://github.com/oclif/oclif/commit/f833799))
+
+<a name="1.4.11"></a>
+## [1.4.11](https://github.com/oclif/oclif/compare/01370d252da66e25b80a2947ec38e4db21101a61...v1.4.11) (2018-03-23)
+
+
+### Bug Fixes
+
+* move docs to oclif.io ([43ebeba](https://github.com/oclif/oclif/commit/43ebeba))
+* move docs to oclif.io ([c067401](https://github.com/oclif/oclif/commit/c067401))
+
+<a name="1.4.10"></a>
+## [1.4.10](https://github.com/oclif/oclif/compare/71576609c182f8fbffbffdf408671c5cb9c4a0b6...v1.4.10) (2018-03-22)
+
+
+### Bug Fixes
+
+* use npm for scripts if not yarn ([01370d2](https://github.com/oclif/oclif/commit/01370d2))
+
+<a name="1.4.9"></a>
+## [1.4.9](https://github.com/oclif/oclif/compare/5ef966fc1f4165983c9ff6ca8250e7e5d61c79bf...v1.4.9) (2018-03-22)
+
+
+### Bug Fixes
+
+* make yarn optional ([#76](https://github.com/oclif/oclif/issues/76)) ([7157660](https://github.com/oclif/oclif/commit/7157660))
+
+<a name="1.4.7"></a>
+## [1.4.7](https://github.com/oclif/oclif/compare/241741aedd890b37be615972da35f02596cde082...v1.4.7) (2018-03-22)
+
+
+### Bug Fixes
+
+* add path argument description ([c37e724](https://github.com/oclif/oclif/commit/c37e724))
+
+<a name="1.4.6"></a>
+## [1.4.6](https://github.com/oclif/oclif/compare/032b2319d756e0817f96c6311cbaa3a027f6b0e2...v1.4.6) (2018-03-22)
+
+
+### Bug Fixes
+
+* build manifest ([241741a](https://github.com/oclif/oclif/commit/241741a))
+
+<a name="1.4.5"></a>
+## [1.4.5](https://github.com/oclif/oclif/compare/4d774b17451c873cb736c8d458b884a4d2916474...v1.4.5) (2018-03-22)
+
+
+### Bug Fixes
+
+* set OCLIF_NEXT_VERSION ([032b231](https://github.com/oclif/oclif/commit/032b231))
+
+<a name="1.4.4"></a>
+## [1.4.4](https://github.com/oclif/oclif/compare/f9a733a0c78d4f9e2a8a22d3fc7320cf2d978398...v1.4.4) (2018-03-22)
+
+
+### Bug Fixes
+
+* set OCLIF_NEXT_VERSION ([4d774b1](https://github.com/oclif/oclif/commit/4d774b1))
+
+<a name="1.4.3"></a>
+## [1.4.3](https://github.com/oclif/oclif/compare/c9307e7e986a44e5882d29bee5e0ffaca266834b...v1.4.3) (2018-03-22)
+
+
+### Bug Fixes
+
+* updated dev-cli ([f9a733a](https://github.com/oclif/oclif/commit/f9a733a))
+
+<a name="1.4.1"></a>
+## [1.4.1](https://github.com/oclif/oclif/compare/e3a7943855ffbe96de697541025a90cf59194076...v1.4.1) (2018-03-21)
+
+
+### Bug Fixes
+
+* remove noUnusedLocals and noUnusedParameters as these are checked with tslint ([06e2c46](https://github.com/oclif/oclif/commit/06e2c46))
+
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/oclif/oclif/compare/009490b5de98bb9e71874abee253eb1be85f38d1...v1.4.0) (2018-03-21)
+
+
+### Features
+
+* add tslint component option ([#63](https://github.com/oclif/oclif/issues/63)) ([e3a7943](https://github.com/oclif/oclif/commit/e3a7943))
+
+<a name="1.3.14"></a>
+## [1.3.14](https://github.com/oclif/oclif/compare/64971883b1df554d06a13a8242694f34c517b1e6...v1.3.14) (2018-03-21)
+
+
+### Bug Fixes
+
+* add -h and -v flags for single ([#62](https://github.com/oclif/oclif/issues/62)) ([009490b](https://github.com/oclif/oclif/commit/009490b))
+
+<a name="1.3.13"></a>
+## [1.3.13](https://github.com/oclif/oclif/compare/d91482b5a701198d554bde2495be924ece3486cc...v1.3.13) (2018-03-21)
+
+
+### Bug Fixes
+
+* use version long flag for circle test ([#61](https://github.com/oclif/oclif/issues/61)) ([6497188](https://github.com/oclif/oclif/commit/6497188))
+
+<a name="1.3.12"></a>
+## [1.3.12](https://github.com/oclif/oclif/compare/edacb134324c59c5a778ff3fd870804800662eeb...v1.3.12) (2018-03-21)
+
+
+### Bug Fixes
+
+* readme template ([#60](https://github.com/oclif/oclif/issues/60)) ([d91482b](https://github.com/oclif/oclif/commit/d91482b))
+
+<a name="1.3.11"></a>
+## [1.3.11](https://github.com/oclif/oclif/compare/c22f423a73ba134afb1087b125413de6fb5a223e...v1.3.11) (2018-03-20)
+
+
+### Bug Fixes
+
+* bump dependencies ([edacb13](https://github.com/oclif/oclif/commit/edacb13))
+
+<a name="1.3.10"></a>
+## [1.3.10](https://github.com/oclif/oclif/compare/bbea1b6c7c4d0c3a90a0da7ca37766448561730a...v1.3.10) (2018-03-15)
+
+
+### Bug Fixes
+
+* return a promise from yeoman callback style so it actually awaits ([#43](https://github.com/oclif/oclif/issues/43)) ([c22f423](https://github.com/oclif/oclif/commit/c22f423))
+
 <a name="1.3.9"></a>
 ## [1.3.9](https://github.com/oclif/oclif/compare/a45f4058f9492d8c7cb7cf4a6906a709b34165e9...v1.3.9) (2018-03-08)
 
